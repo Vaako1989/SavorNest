@@ -1,0 +1,848 @@
+:root {
+    --primary-blue: #1a4a9f;
+    --secondary-blue: #2b5bc1;
+    --dark-blue: #0a2657;
+    --light-blue: #e8f1ff;
+    --accent-red: #d03232;
+    --gold: #d4af37;
+    --white: #ffffff;
+    --off-white: #f9f6f0;
+    --text-color: #333333;
+}
+
+body {
+    margin: 0;
+    font-family: "Microsoft JhengHei", "SimSun", serif;
+    background-color: var(--off-white);
+    color: var(--text-color);
+}
+
+/* 導航欄樣式 */
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 2px solid var(--primary-blue);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    padding: 0.8rem 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.nav-item {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+    font-family: "SimSun", serif;
+    font-weight: 600;
+}
+
+.nav-item::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background: var(--primary-blue);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-item:hover {
+    color: var(--gold);
+}
+
+.nav-item:hover::after {
+    width: 100%;
+}
+
+.cart-icon {
+    position: relative;
+    font-size: 1.3rem;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background: var(--accent-red);
+    color: var(--white);
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: var(--primary-blue);
+    transition: all 0.3s ease;
+}
+
+/* 響應式導航設計 */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 1rem 0;
+        gap: 1rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 6px);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -5px);
+    }
+
+    .logo img {
+        height: 32px;
+    }
+    
+    .navbar {
+        padding: 0.6rem 0;
+    }
+}
+
+/* 更新主視覺區域樣式 */
+.hero {
+    margin-top: 70px;
+    background: linear-gradient(rgba(26, 74, 159, 0.8), rgba(26, 74, 159, 0.7)),
+                url('images/chinese-pattern-bg.jpg');
+    background-size: cover;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('images/wave-pattern.png') repeat;
+    opacity: 0.05;
+    animation: backgroundMove 30s linear infinite;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    max-width: 800px;
+}
+
+.hero-logo {
+    margin-bottom: 4rem;
+    animation: fadeInDown 1.5s ease-out;
+    position: relative;
+}
+
+.hero-logo::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+.hero-logo img {
+    width: 560px;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-family: "SimSun", serif;
+    font-size: 3rem;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--white);
+    margin-bottom: 3rem;
+    animation: fadeInUp 1s ease-out 0.7s both;
+}
+
+/* 美化立即選購按鈕 */
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    background: var(--white);
+    color: var(--primary-blue);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1s ease-out 0.9s both;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    background: var(--gold);
+    color: var(--white);
+}
+
+.cta-button:hover::before {
+    transform: translateX(100%);
+}
+
+.button-text {
+    margin-right: 0.8rem;
+}
+
+.button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover .button-icon {
+    transform: translateX(4px);
+}
+
+/* 添加動畫關鍵幀 */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes backgroundMove {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 100% 100%;
+    }
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .hero-logo img {
+        width: 320px;
+    }
+    
+    .hero-logo::before {
+        width: 140%;
+        height: 140%;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .cta-button {
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-logo img {
+        width: 280px;
+    }
+}
+
+/* 添加光暈動畫 */
+@keyframes glowPulse {
+    0% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* 產品卡片相關樣式 */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.product-card {
+    background: var(--white);
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+}
+
+.product-card h3 {
+    font-family: "SimSun", serif;
+    color: var(--dark-blue);
+    font-size: 1.5rem;
+    margin: 1rem 0;
+}
+
+.product-image {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.product-image img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* 產品標籤樣式 */
+.premium-tag, .gift-tag, .new-tag, .hot-tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: var(--white);
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+
+.premium-tag {
+    background: var(--gold);
+}
+
+.gift-tag {
+    background: var(--accent-red);
+}
+
+.new-tag {
+    background: #2ECC71;
+}
+
+.hot-tag {
+    background: #E74C3C;
+}
+
+.product-description {
+    margin: 1rem 0;
+}
+
+.price {
+    color: var(--accent-red);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    text-align: left;
+}
+
+.features-list li {
+    padding: 0.3rem 0;
+    color: #666;
+    font-size: 0.9rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.features-list li:before {
+    content: "✓";
+    color: var(--primary-blue);
+    position: absolute;
+    left: 0;
+}
+
+.add-to-cart {
+    background: var(--primary-blue);
+    color: var(--white);
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background: var(--dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 74, 159, 0.2);
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    
+    .product-image img {
+        height: 220px;
+    }
+}
+
+/* 新增裝飾元素 */
+.decorative-border {
+    position: relative;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.decorative-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid var(--primary-blue);
+    border-radius: 8px;
+    opacity: 0.2;
+}
+
+/* 區段標題樣式 */
+section h2 {
+    font-family: "SimSun", serif;
+    font-size: 2.5rem;
+    color: var(--dark-blue);
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--primary-blue);
+}
+
+/* 品牌特色區塊樣式更新 */
+.features {
+    background: var(--off-white);
+    padding: 6rem 0;
+    position: relative;
+}
+
+.features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    padding: 0 2rem;
+}
+
+.feature-item {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.feature-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('images/chinese-pattern-light.png') no-repeat center;
+    background-size: cover;
+    opacity: 0.05;
+    z-index: 0;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--primary-blue);
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.feature-content {
+    position: relative;
+    z-index: 1;
+}
+
+.feature-content h3 {
+    font-family: "SimSun", serif;
+    color: var(--dark-blue);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.feature-list li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.feature-list li::before {
+    content: '•';
+    color: var(--primary-blue);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.product-types {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.type {
+    text-align: center;
+    padding: 1rem;
+    background: var(--light-blue);
+    border-radius: 8px;
+}
+
+.type-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.member-benefits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.benefit {
+    text-align: center;
+    padding: 1rem;
+}
+
+.benefit i {
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+/* 響應式調整 */
+@media (max-width: 992px) {
+    .features-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-types,
+    .member-benefits {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .feature-item {
+        padding: 1.5rem;
+    }
+}
+
+/* 新增青花瓷風格的分隔線 */
+.section-divider {
+    height: 40px;
+    background: url('images/wave-pattern.png') repeat-x center;
+    opacity: 0.2;
+    margin: 3rem 0;
+}
+
+/* 品牌故事區塊樣式 */
+.brand-story {
+    background: var(--off-white);
+    padding: 4rem 0;
+    position: relative;
+}
+
+.story-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.story-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.story-header h3 {
+    font-family: "SimSun", serif;
+    font-size: 2rem;
+    color: var(--dark-blue);
+    margin-bottom: 1rem;
+}
+
+.chinese-seal {
+    width: 80px;
+    height: 80px;
+    background: url('images/seal.png') no-repeat center;
+    background-size: contain;
+    position: absolute;
+    right: 2rem;
+    top: -1rem;
+    opacity: 0.8;
+    transform: rotate(15deg);
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.story-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.story-text {
+    position: relative;
+    padding: 2rem;
+}
+
+.story-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('images/chinese-pattern-light.png') no-repeat center;
+    background-size: cover;
+    opacity: 0.05;
+    z-index: -1;
+}
+
+.highlight {
+    font-size: 1.2rem;
+    color: var(--dark-blue);
+    font-weight: 500;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    border-left: 3px solid var(--primary-blue);
+    padding-left: 1rem;
+}
+
+.story-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.feature h4 {
+    font-family: "SimSun", serif;
+    color: var(--dark-blue);
+    margin-bottom: 0.5rem;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .story-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .story-features {
+        grid-template-columns: 1fr;
+    }
+
+    .chinese-seal {
+        display: none;
+    }
+
+    .story-text {
+        padding: 1rem;
+    }
+}
+
+/* 裝飾分隔線動畫 */
+.section-divider {
+    animation: wave 20s linear infinite;
+}
+
+@keyframes wave {
+    from {
+        background-position: 0 center;
+    }
+    to {
+        background-position: 100% center;
+    }
+} 
